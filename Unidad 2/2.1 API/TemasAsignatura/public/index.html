@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="estilos.css">
+    <title>Prácticas de Ingeniería en Sistemas</title>
+</head>
+<body>
+    <h1>Ingeniería en Sistemas</h1> 
+    <form id="Form" class="buttons">
+        <button type="button" data-type="Programación">💻</button>
+        <button type="button" data-type="Bases de Datos">🗃️</button>
+        <button type="button" data-type="Redes">🌐</button>
+        <button type="button" data-type="Inteligencia Artificial">🧠</button>
+    </form>
+    <div id="Container"></div>
+
+    <script>
+        document.querySelectorAll("#Form button").forEach(button => {
+            button.addEventListener("click", async (event) => {
+                const type = event.target.getAttribute("data-type");
+                const response = await fetch(`/tema/${encodeURIComponent(type)}`);
+                const tema = await response.json();
+
+                const contenedor = document.getElementById("Container");
+                
+                if (tema.error) {
+                    contenedor.innerHTML = "<h2>Tema no encontrado</h2>";
+                } else {
+                    contenedor.innerHTML = `
+                        <h2>${tema.nombre}</h2>
+                        <p><strong>Descripción:</strong> ${tema.descripcion}</p>
+                        <p><strong>Palabras claves:</strong> ${tema.palabrasClaves.join(", ")}</p>
+                        <h3>Prácticas recomendadas:</h3>
+                        <ul id="practicasLista">
+                            ${tema.practicas.map(practica => `
+                                <li>
+                                    <strong>${practica.titulo}</strong><br>
+                                    <em>Descripción:</em> ${practica.descripcion}<br>
+                                    <em>Objetivo:</em> ${practica.objetivo}
+                                </li>
+                            `).join("")}
+                        </ul>`;
+                }
+            });
+        });
+    </script>
+</body>
+</html>
