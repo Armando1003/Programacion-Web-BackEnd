@@ -2,7 +2,7 @@
 import axios from 'axios';
 
 //Configuración básica
-const GITHUB_TOKEN = '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'; 
+const GITHUB_TOKEN = 'TOKEN DE GITHUB'; //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 
 const githubApi = axios.create({
   baseURL: 'https://api.github.com',
   headers: {
