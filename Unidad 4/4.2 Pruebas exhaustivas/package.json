@@ -1,0 +1,15 @@
+{
+  "name": "4.2-pruebas-exhaustivas",
+  "version": "1.0.0",
+  "main": "funciones.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "devDependencies": {
+    "jest": "^29.7.0"
+  }
+}
